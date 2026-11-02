@@ -591,10 +591,14 @@ void VescHandler::enterWifiBridgeMode() {
 
 #if !defined(LGFX_LINUX_FB) && !defined(SIMULATOR)
     WiFi.mode(WIFI_AP);
+    IPAddress local_ip(192, 168, 4, 1);
+    IPAddress gateway(192, 168, 4, 1);
+    IPAddress subnet(255, 255, 255, 0);
+    WiFi.softAPConfig(local_ip, gateway, subnet);
     WiFi.softAP("VESC-DASH-AP");
     _wifi_server.begin(6510);
     _wifi_server.setNoDelay(true);
-    Serial.println("[WIFI_BRIDGE] SoftAP started: SSID='VESC-DASH-AP', Port=6510");
+    Serial.println("[WIFI_BRIDGE] SoftAP started: SSID='VESC-DASH-AP', IP=192.168.4.1, Port=6510");
 #endif
 }
 
@@ -663,6 +667,9 @@ void VescHandler::updateWifiBridge() {
         if (_wifi_client_connected) {
             _wifi_client_connected = false;
             _wifi_client_ip[0] = '\0';
+            if (_wifi_client) {
+                _wifi_client.stop();
+            }
             Serial.println("[WIFI_BRIDGE] Client disconnected.");
         }
     }

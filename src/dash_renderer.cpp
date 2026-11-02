@@ -1557,11 +1557,11 @@ void DashboardRenderer::renderSettingsScreen(const DashTelemetry &telemetry) {
             _canvas->setTextColor(COLOR_CYAN, COLOR_SURFACE);
             if (_menu_root_idx == 4 && _menu_sub_idx == 0) {
                 _canvas->drawString("[1+2] Pull From VESC", 365, 240, &fonts::Font4);
-            } else if (_menu_root_idx == 4 && _menu_sub_idx == 1) {
+            } else if (_menu_root_idx == 4 && (_menu_sub_idx == 1 || _menu_sub_idx == 2)) {
                 _canvas->drawString("[1+2] Start Bridge", 365, 240, &fonts::Font4);
-            } else if (_menu_root_idx == 4 && _menu_sub_idx >= 2 && _menu_sub_idx <= 3) {
+            } else if (_menu_root_idx == 4 && (_menu_sub_idx == 3 || _menu_sub_idx == 4)) {
                 _canvas->drawString("[1+2] Confirm Reset", 365, 240, &fonts::Font4);
-            } else if (_menu_root_idx == 4 && _menu_sub_idx == 4) {
+            } else if (_menu_root_idx == 4 && _menu_sub_idx == 5) {
                 _canvas->drawString("Info Only", 365, 240, &fonts::Font4);
             } else if (_menu_root_idx == 2 && _menu_sub_idx == 4) {
                 _canvas->drawString("[1+2] Confirm Reset", 365, 240, &fonts::Font4);
